@@ -1,7 +1,7 @@
 This patches the current version of com.altice.meo.androidtv to work on devices other than the officially supported devices:
  - Xiaomi Mi Box
  - Nvidia Shield
- - Official Android TV Box
+ - Official Meo Android TV Box
 
 It should also allow it to run on rooted devices.
 
