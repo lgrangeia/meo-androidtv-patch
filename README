@@ -1,0 +1,48 @@
+This patches the current version of com.altice.meo.androidtv to work on devices other than the officially supported devices:
+ - Xiaomi Mi Box
+ - Nvidia Shield
+ - Official Android TV Box
+
+It should also allow it to run on rooted devices.
+
+I have successfuly used this to get the app to work on a 2017 Sony Bravia running Android 8.
+
+Disclaimer: Use at own risk and only if you are a paying MEO customer.
+
+How to patch the APK:
+
+1. Get the APK (from, eg. apktada)
+
+
+2. Use apktool (2.4.1+) to decompress and decompile it:
+
+apktool d ../com.alticelabs.meo.androidtv.com.apk
+
+
+3. Patch using the included .patch file:
+
+$ cd com.alticelabs.meo.androidtv.com
+$ patch -p1 < com.alticelabs.meo.androidtv.patch
+
+
+4. Rebuild the APK using apktool:
+
+$ apktool b -f -v com.alticelabs.meo.androidtv.com -o output.apk
+
+
+5. Create a self signing key (you will need android studio sdk tools for this):
+
+$ keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+
+
+6. Sign the APK:
+
+$ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks output.apk my-alias
+
+
+7. zipalign it (this part is actually important):
+
+$ zipalign -p -v 4 output.apk output-zipalign.apk
+
+
+8. Install the output-zipalign.apk on your device (via ADB) and enjoy.
