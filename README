@@ -16,7 +16,7 @@ How to patch the APK:
 
 2. Use apktool (2.4.1+) to decompress and decompile it:
 
-apktool d ../com.alticelabs.meo.androidtv.com.apk
+apktool d com.alticelabs.meo.androidtv.com.apk
 
 
 3. Patch using the included .patch file:
